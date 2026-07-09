@@ -5,7 +5,11 @@ cd /d "C:\Users\sithi\Desktop\3D_Portfolio"
 git pull origin main --rebase
 
 git add .
-git commit --allow-empty -m "Auto update at startup: %date% %time%"
+
+for /f "usebackq delims=" %%i in (`powershell -NoProfile -Command "Get-Date -Format 'yyyy-MM-dd HH:mm:ss'"`) do set "TIMESTAMP=%%i"
+
+git commit --allow-empty -m "Auto update at startup: %TIMESTAMP%"
+
 git push origin main
 
 echo Done! Everything is up to date.
